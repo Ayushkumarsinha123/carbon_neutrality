@@ -1,0 +1,19 @@
+{
+  "name": "carbon_neutrality",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "client": "npm run dev --prefix client",
+    "server": "nodemon backend/server.js ",
+    "dev":"concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.10"
+  }
+}
