@@ -1,10 +1,12 @@
 import express from 'express';
-import { createEmission, getAllEmission } from '../controllers/emissionController';
+import authMiddleware from '../middleware/authMiddleware';
+import { addEmission, getMineEmissions } from '../controllers/emissionController';
+
+
 
 const router = express.Router();
 router.route('/')
-   .post(createEmission)
-   .get(getAllEmission);
+   .post(authMiddleware, addEmission)
+   .get(authMiddleware, getMineEmissions);
 
-
-  export default router;
+   export default router;

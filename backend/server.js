@@ -1,5 +1,6 @@
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
+import app from "./app.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -7,9 +8,6 @@ const __dirname = dirname(__filename);
 import dotenv from "dotenv";
 // import app from './app.js';
 import connectDB from "./config/db.js";
-
-import express from "express";
-const app = express();
 
 dotenv.config({ path: path.join(__dirname, ".env") }); // load env vars
 
