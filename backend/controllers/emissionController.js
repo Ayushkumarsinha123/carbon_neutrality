@@ -1,4 +1,4 @@
-import Emission from "../models/emissionModel";
+import Emission from "../models/emissionModel.js";
 
 // add new emission entry 
 export const addEmission = async (req, res) => {
