@@ -4,7 +4,8 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import authRouter from "./routes/authRoutes.js"
 import emissionRouter from "./routes/emissionRoutes.js"
-
+import CarbonSinkRouter from "./routes/carbonSinkRoutes.js"
+import GapAnalysisRouter from "./routes/gapAnalysisRoutes.js"
 // import your routes
 
 // load enviroment variable
@@ -27,6 +28,8 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/emission",emissionRouter )
+app.use("/api/v1/carbonSink", CarbonSinkRouter)
+app.use("api/v1/gapAnalysis", GapAnalysisRouter)
 
 // 404 Route handler
 app.use((req, res) => {

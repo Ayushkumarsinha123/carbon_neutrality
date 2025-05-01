@@ -3,8 +3,9 @@ import Emission from "../models/emissionModel.js";
 // add new emission entry 
 export const addEmission = async (req, res) => {
   try{
+    // Extract 'emissionValue' from req.body
     const {activityType, emissionValue} = req.body;
-    const mineId = req.user.userId; // comes from authmiddleware
+    const mineId = req.userId; // comes from authmiddleware
 
     const newEmission = new Emission({
       mineId,

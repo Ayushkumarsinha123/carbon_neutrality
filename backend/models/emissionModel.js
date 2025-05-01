@@ -14,6 +14,10 @@ const emissionSchema = new mongoose.Schema({
   data : {
     type : Date,
     default: Date.now
+  },
+  emissionValue : {
+    type : Number,
+    required : true
   }
 });
 const Emission  = mongoose.model('Emission', emissionSchema);
