@@ -11,7 +11,11 @@ const emissionSchema = new mongoose.Schema({
     enum : ['Excavation','Transportation','Drilling','Machinery','Electricity'],
     required : true
   },
-  data : {
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  date : {
     type : Date,
     default: Date.now
   },

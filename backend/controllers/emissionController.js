@@ -1,39 +1,50 @@
 import Emission from "../models/emissionModel.js";
+import emissionFactors from "../utils/emissionFactors.js";
+import { calculateEmissions } from "../utils/carbonCreditCalculator.js";
 
-// add new emission entry 
+// Add new emission entry with auto calculation
 export const addEmission = async (req, res) => {
-  try{
-    // Extract 'emissionValue' from req.body
-    const {activityType, emissionValue} = req.body;
-    const mineId = req.userId; // comes from authmiddleware
+  try {
+    const { activityType, quantity } = req.body;
+    const mineId = req.user.userId;
+
+    if (!activityType || !quantity) {
+      return res.status(400).json({ message: "Activity type and quantity are required." });
+    }
+
+    const factor = emissionFactors[activityType];
+    if (!factor) {
+      return res.status(400).json({ message: "Invalid activity type." });
+    }
+
+    const emissionValue = calculateEmissions({ [activityType]: quantity }, emissionFactors);
 
     const newEmission = new Emission({
       mineId,
       activityType,
-      emissionValue
+      emissionValue,
+      quantity
     });
 
     await newEmission.save();
     res.status(201).json({
-      message : 'emission data added', emission: newEmission
+      message: "Emission data added.",
+      emission: newEmission
     });
-  } catch(err) {
-    console.error('Add Emission Error:',err);
-    res.status(500).json({
-      message : 'Failed to add emission data'
-    });
+  } catch (err) {
+    console.error("Add Emission Error:", err);
+    res.status(500).json({ message: "Failed to add emission data." });
   }
 };
 
-// get all emissions for logged-in mine/user
+// Get all emissions for logged-in user
 export const getMineEmissions = async (req, res) => {
   try {
     const mineId = req.user.userId;
-
-    const emission = await Emission.find({ mineId }).sort({date:-1});
+    const emission = await Emission.find({ mineId }).sort({ date: -1 });
     res.status(200).json(emission);
-  } catch(err) {
-    console.error('get emission error:', err)
-    res.status(500).json({message : 'failed to fetch emission data'});
+  } catch (err) {
+    console.error("Get emission error:", err);
+    res.status(500).json({ message: "Failed to fetch emission data." });
   }
 };
