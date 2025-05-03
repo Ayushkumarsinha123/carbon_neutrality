@@ -6,6 +6,7 @@ import authRouter from "./routes/authRoutes.js"
 import emissionRouter from "./routes/emissionRoutes.js"
 import CarbonSinkRouter from "./routes/carbonSinkRoutes.js"
 import GapAnalysisRouter from "./routes/gapAnalysisRoutes.js"
+import SimulationRouter from "./routes/simulationRoutes.js"
 // import your routes
 
 // load enviroment variable
@@ -30,6 +31,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/emission",emissionRouter )
 app.use("/api/v1/carbonSink", CarbonSinkRouter)
 app.use("api/v1/gapAnalysis", GapAnalysisRouter)
+app.use("api/v1/simulation", SimulationRouter )
 
 // 404 Route handler
 app.use((req, res) => {
