@@ -15,7 +15,10 @@ dotenv.config();
 const app = express();
 
 // middlewares
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", // frontend URL (change if deployed elsewhere)
+  credentials: true,
+}));
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -30,8 +33,8 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/emission",emissionRouter )
 app.use("/api/v1/carbonSink", CarbonSinkRouter)
-app.use("api/v1/gapAnalysis", GapAnalysisRouter)
-app.use("api/v1/simulation", SimulationRouter )
+app.use("/api/v1/gapAnalysis", GapAnalysisRouter)
+app.use("/api/v1/simulation", SimulationRouter )
 
 // 404 Route handler
 app.use((req, res) => {
