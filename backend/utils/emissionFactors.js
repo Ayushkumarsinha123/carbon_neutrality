@@ -1,12 +1,9 @@
-
 const emissionFactors = {
-  electricity: 0.92,       // kg CO2 per kWh
-  gasoline: 2.31,          // kg CO2 per liter
-  diesel: 2.68,            // kg CO2 per liter
-  naturalGas: 2.03,        // kg CO2 per m³
-  airTravel: 0.15,         // kg CO2 per passenger-km
-  trainTravel: 0.041,      // kg CO2 per passenger-km
-  meat: 27,                // kg CO2 per kg of beef
+  Excavation: 2.5,
+  Transportation: 3.2,
+  Drilling: 4.1,
+  Machinery: 5.0,
+  Electricity: 0.92
 };
 
 export default emissionFactors;

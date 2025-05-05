@@ -22,7 +22,7 @@ const RegisterForm = () => {
     try {
       const res = await register(formData);
       console.log(res.message); // optional success message
-      navigate('/dashboard'); // or to dashboard if you prefer
+      navigate('/'); // or to dashboard if you prefer
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || 'Registration failed');

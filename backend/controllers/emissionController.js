@@ -5,8 +5,11 @@ import { calculateEmissions } from "../utils/carbonCreditCalculator.js";
 // Add new emission entry with auto calculation
 export const addEmission = async (req, res) => {
   try {
+    console.log("Received emission request:", req.body);
+    console.log("Authenticated user:", req.user);
+
     const { activityType, quantity } = req.body;
-    const mineId = req.user.userId;
+    const mineId = req.userId;
 
     if (!activityType || !quantity) {
       return res.status(400).json({ message: "Activity type and quantity are required." });
@@ -32,7 +35,7 @@ export const addEmission = async (req, res) => {
       emission: newEmission
     });
   } catch (err) {
-    console.error("Add Emission Error:", err);
+    console.error("🔥 Add Emission Error:", err);
     res.status(500).json({ message: "Failed to add emission data." });
   }
 };
@@ -40,7 +43,7 @@ export const addEmission = async (req, res) => {
 // Get all emissions for logged-in user
 export const getMineEmissions = async (req, res) => {
   try {
-    const mineId = req.user.userId;
+    const mineId = req.userId;
     const emission = await Emission.find({ mineId }).sort({ date: -1 });
     res.status(200).json(emission);
   } catch (err) {

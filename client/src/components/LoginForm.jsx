@@ -1,7 +1,7 @@
 // src/components/LoginForm.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { loginUser } from '../services/authService';
+import { login } from '../services/authService';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +11,7 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await loginUser({ email, password });  // saves token inside service
+      await login({ email, password });  // saves token inside service
       navigate('/dashboard'); // redirect
     } catch (err) {
       alert('Login failed. Please check your credentials.');
